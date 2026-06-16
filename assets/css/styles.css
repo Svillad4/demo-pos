@@ -1,52 +1,80 @@
 :root{
-  --bg:#0f172a;--bg-soft:#111827;--panel:#ffffff;--panel-soft:#f8fafc;--line:#e2e8f0;
-  --text:#0f172a;--muted:#64748b;--primary:#2563eb;--primary-dark:#1d4ed8;--success:#16a34a;
-  --warning:#d97706;--danger:#dc2626;--info:#0891b2;--shadow:0 20px 50px rgba(15,23,42,.12);--radius:24px
+  /* MEJORA UI: Colores modernizados con mejor contraste y vibración */
+  --bg:#0a0e27;--bg-soft:#111827;--panel:#ffffff;--panel-soft:#f0f4f9;--line:#d4dce8;
+  --text:#0f172a;--muted:#6b7280;--primary:#2563eb;--primary-dark:#1d4ed8;--success:#10b981;
+  --warning:#f59e0b;--danger:#ef4444;--info:#06b6d4;--shadow:0 10px 30px rgba(15,23,42,.15);--radius:24px
 }
 *{box-sizing:border-box}html,body{margin:0;padding:0;font-family:'Inter',system-ui,sans-serif;background:#e5eefb;color:var(--text)}
 button,input,textarea,select{font:inherit}button{cursor:pointer}
 .app-shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
-.sidebar{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#fff;padding:24px 20px;display:flex;flex-direction:column;gap:24px}
+.sidebar{background:linear-gradient(180deg,#0a0e27 0%,#0f172a 100%);color:#fff;padding:24px 20px;display:flex;flex-direction:column;gap:24px;box-shadow:2px 0 20px rgba(15,23,42,.15)}/* MEJORA UI: Sombra lateral para mayor profundidad */
 .brand{display:flex;gap:14px;align-items:center}.brand-logo{width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,#60a5fa,#2563eb);display:grid;place-items:center;font-size:1.4rem;font-weight:800;box-shadow:0 10px 24px rgba(37,99,235,.35)}
 .brand h1{margin:0;font-size:1.2rem}.brand p{margin:4px 0 0;color:#cbd5e1;font-size:.9rem}
-.nav{display:grid;gap:10px}.nav-link{background:transparent;border:1px solid rgba(255,255,255,.08);color:#e5e7eb;padding:14px 16px;border-radius:18px;text-align:left;transition:.25s ease}
-.nav-link:hover,.nav-link.active{background:rgba(37,99,235,.18);border-color:rgba(96,165,250,.45);transform:translateX(3px)}
-.sidebar-footer{margin-top:auto;display:grid;gap:14px}.user-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:14px;border-radius:20px;display:flex;gap:12px;align-items:center}
+.nav{display:grid;gap:10px}/* MEJORA UI: Mejorados estilos de navegación con transiciones suaves */
+.nav-link{background:transparent;border:1px solid rgba(255,255,255,.12);color:#e5e7eb;padding:14px 16px;border-radius:20px;text-align:left;transition:.35s cubic-bezier(0.4, 0, 0.2, 1);cursor:pointer}
+.nav-link:hover,.nav-link.active{background:rgba(37,99,235,.25);border-color:rgba(96,165,250,.6);transform:translateX(4px);box-shadow:0 4px 12px rgba(37,99,235,.2)}
+.sidebar-footer{margin-top:auto;display:grid;gap:14px}/* MEJORA UI: Tarjeta de usuario mejorada con bordes y sombra */
+.user-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:14px;border-radius:20px;display:flex;gap:12px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:.3s ease}
+.user-card:hover{background:rgba(255,255,255,.12);border-color:rgba(96,165,250,.4)}
 .avatar{width:46px;height:46px;border-radius:14px;background:#1d4ed8;display:grid;place-items:center;font-weight:700}.user-card p{margin:4px 0 0;color:#cbd5e1;font-size:.88rem}
 .main-content{padding:24px 28px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow);border-radius:28px;padding:18px 22px;margin-bottom:20px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.85);box-shadow:0 8px 24px rgba(15,23,42,.1);border-radius:28px;padding:18px 22px;margin-bottom:20px}/* MEJORA UI: Topbar con efecto glass mejorado */
 .topbar h2{margin:0 0 6px;font-size:1.4rem}.topbar p{margin:0;color:var(--muted)}.topbar-actions{display:flex;gap:12px;align-items:center}
 .view{display:none}.view.active{display:block}
 .hero-panel{background:linear-gradient(135deg,#eff6ff,#ffffff);border:1px solid #dbeafe;border-radius:28px;padding:28px;display:flex;justify-content:space-between;gap:20px;align-items:center;box-shadow:var(--shadow);margin-bottom:20px}
 .hero-panel h3{margin:8px 0 10px;font-size:1.8rem;max-width:900px}.hero-panel p{margin:0;max-width:900px;color:var(--muted);line-height:1.7}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
 .eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-weight:700;font-size:.8rem}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}.stat-card{background:var(--panel);border:1px solid var(--line);padding:22px;border-radius:24px;box-shadow:var(--shadow)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}/* MEJORA UI: Tarjetas estadísticas con hover efecto */
+.stat-card{background:var(--panel);border:1px solid var(--line);padding:22px;border-radius:24px;box-shadow:0 4px 16px rgba(15,23,42,.08);transition:.35s cubic-bezier(0.4, 0, 0.2, 1)}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(15,23,42,.12);border-color:#2563eb}
 .stat-card h4{margin:0 0 14px;color:var(--muted);font-size:.95rem;font-weight:600}.stat-value{font-size:2rem;font-weight:800;margin-bottom:10px}.stat-meta{font-size:.92rem;color:var(--muted)}
-.grid-two{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow)}.light-card{background:var(--panel-soft)}
+.grid-two{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}/* MEJORA UI: Tarjetas con transiciones suaves y mejor sombra */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:0 4px 16px rgba(15,23,42,.08);transition:.35s ease}.card:hover{box-shadow:0 8px 24px rgba(15,23,42,.12)}.light-card{background:var(--panel-soft)}
 .card-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.card-header h3{margin:0}
 .badge{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;background:#e2e8f0;color:#334155;font-size:.8rem;font-weight:700}
 .badge-success{background:#dcfce7;color:#166534}.badge-warning{background:#ffedd5;color:#9a3412}.badge-danger{background:#fee2e2;color:#991b1b}.badge-info{background:#cffafe;color:#155e75}
 .activity-feed,.list-stack{display:grid;gap:12px}.feed-item,.list-item{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}
 .feed-item strong,.list-item strong{display:block;margin-bottom:6px}.feed-item p,.list-item p{margin:0;color:var(--muted);line-height:1.6}
 .section-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:8px 0 16px}.section-head h3{margin:0 0 6px;font-size:1.5rem}.section-head p{margin:0;color:var(--muted)}
-.mesas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.mesa-card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow);display:grid;gap:14px}
+.mesas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}/* MEJORA UI: Tarjetas de mesa con hover y transición mejorada */
+.mesa-card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 4px 16px rgba(15,23,42,.08);display:grid;gap:14px;transition:.35s cubic-bezier(0.4, 0, 0.2, 1)}
+.mesa-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(15,23,42,.12);border-color:#2563eb}
 .mesa-card header{display:flex;justify-content:space-between;align-items:center}.mesa-card h4{margin:0;font-size:1.1rem}.mesa-card p{margin:0;color:var(--muted)}.mesa-meta{display:grid;gap:8px}
 .status-pill{display:inline-flex;padding:7px 11px;border-radius:999px;font-size:.8rem;font-weight:700}.status-libre{background:#dcfce7;color:#166534}.status-ocupada{background:#dbeafe;color:#1d4ed8}.status-espera{background:#ffedd5;color:#9a3412}.status-listo{background:#f3e8ff;color:#7e22ce}.status-pagado{background:#e2e8f0;color:#334155}
-.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.menu-card,.selector-item,.kitchen-ticket{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}/* MEJORA UI: Tarjetas de menú y cocina con transiciones mejoradas */
+.menu-card,.selector-item,.kitchen-ticket{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 4px 16px rgba(15,23,42,.08);transition:.35s cubic-bezier(0.4, 0, 0.2, 1)}
+.menu-card:hover,.selector-item:hover,.kitchen-ticket:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,23,42,.12)}
 .menu-card h4,.selector-item h4,.kitchen-ticket h4{margin:0 0 8px}.menu-card p,.selector-item p,.kitchen-ticket p{margin:0;color:var(--muted);line-height:1.6}.menu-price{font-size:1.3rem;font-weight:800;margin:12px 0;color:var(--primary)}
 .kitchen-board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.ticket-items{margin:12px 0 0;padding-left:18px;color:var(--muted)}.ticket-items li{margin:4px 0}.ticket-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px}
 .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.form-grid label{display:grid;gap:8px;font-weight:600}
-.form-grid input,.form-grid textarea{border:1px solid #cbd5e1;border-radius:16px;padding:14px;background:#fff;outline:none;transition:.2s}.form-grid input:focus,.form-grid textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.12)}.form-grid .full{grid-column:1/-1}
-.table-wrap{overflow:auto}.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.data-table th{font-size:.88rem;color:#475569;background:#f8fafc}
-.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.58);display:grid;place-items:center;padding:18px;z-index:1000}.modal-backdrop.hidden{display:none}.modal{width:min(1120px,100%);background:#fff;border-radius:28px;box-shadow:0 30px 80px rgba(15,23,42,.3);padding:20px}.modal-small{width:min(480px,100%)}.modal-large{width:min(1180px,100%)}
+/* MEJORA UI: Inputs modernos con foco visual mejorado */
+.form-grid input,.form-grid textarea{border:1.5px solid #d4dce8;border-radius:18px;padding:14px 16px;background:#fff;outline:none;transition:.3s cubic-bezier(0.4, 0, 0.2, 1);font-size:1rem}
+.form-grid input:hover,.form-grid textarea:hover{border-color:#b0b8c8;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+.form-grid input:focus,.form-grid textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1),inset 0 0 0 1px rgba(37,99,235,.05)}.form-grid .full{grid-column:1/-1}
+.table-wrap{overflow:auto}/* MEJORA UI: Tablas con resaltado y bordes mejorados */
+.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.data-table th{font-size:.88rem;color:#475569;background:#f0f4f9;font-weight:600}
+.data-table tbody tr{transition:.25s ease}.data-table tbody tr:hover{background:#f0f4f9;box-shadow:inset 0 0 0 1px rgba(37,99,235,.08)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.62);display:grid;place-items:center;padding:18px;z-index:1000;backdrop-filter:blur(2px)}/* MEJORA UI: Modal con backdrop mejorado */
+.modal-backdrop.hidden{display:none}.modal{width:min(1120px,100%);background:#fff;border-radius:28px;box-shadow:0 20px 60px rgba(15,23,42,.25);padding:20px;border:1px solid rgba(255,255,255,.8)}.modal-small{width:min(480px,100%)}.modal-large{width:min(1180px,100%)}
 .modal-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.modal-header h3{margin:6px 0 0}
 .product-selector,.order-items{display:grid;gap:12px;max-height:460px;overflow:auto;padding-right:4px}.selector-row,.order-row{display:flex;justify-content:space-between;align-items:center;gap:10px}.selector-meta,.order-meta{display:grid;gap:4px}
 .summary-box{border:1px solid var(--line);border-radius:20px;padding:14px;background:#fff;display:grid;gap:10px;margin-top:14px}.summary-box div,.selector-row,.order-row{display:flex;justify-content:space-between;align-items:center}
 .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.btn{border:none;border-radius:16px;padding:13px 16px;font-weight:700;transition:.2s ease;display:inline-flex;align-items:center;justify-content:center}.btn:hover{transform:translateY(-1px)}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}.btn-secondary{background:#e2e8f0;color:#0f172a}.btn-success{background:var(--success);color:#fff}.btn-danger{background:var(--danger);color:#fff}.btn-full{width:100%}
-.icon-btn{width:44px;height:44px;border:none;border-radius:14px;background:#e2e8f0;display:grid;place-items:center;font-size:1.1rem}
+.btn{border:none;border-radius:18px;padding:13px 16px;font-weight:700;transition:.35s cubic-bezier(0.4, 0, 0.2, 1);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}/* MEJORA UI: Botones con transiciones suaves y mejor hover */
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,23,42,.15)}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.3)}
+.btn-primary:hover{background:var(--primary-dark);box-shadow:0 8px 20px rgba(37,99,235,.4)}
+.btn-secondary{background:#e2e8f0;color:#0f172a;transition:.35s cubic-bezier(0.4, 0, 0.2, 1)}
+.btn-secondary:hover{background:#d4dce8;transform:translateY(-2px)}
+.btn-success{background:var(--success);color:#fff;box-shadow:0 4px 12px rgba(16,185,129,.3)}
+.btn-success:hover{box-shadow:0 8px 20px rgba(16,185,129,.4)}
+.btn-danger{background:var(--danger);color:#fff;box-shadow:0 4px 12px rgba(239,68,68,.3)}
+.btn-danger:hover{box-shadow:0 8px 20px rgba(239,68,68,.4)}.btn-full{width:100%}
+.icon-btn{width:44px;height:44px;border:none;border-radius:16px;background:#e2e8f0;display:grid;place-items:center;font-size:1.1rem;cursor:pointer;transition:.3s ease}/* MEJORA UI: Botón de icono mejorado */
+.icon-btn:hover{background:#d4dce8;transform:scale(1.05)}
 .login-help{background:#f8fafc;border:1px dashed #cbd5e1;padding:14px;border-radius:16px}.login-help p{margin:4px 0;color:#475569}
-.toast{position:fixed;bottom:22px;right:22px;min-width:280px;max-width:420px;background:#0f172a;color:#fff;padding:14px 16px;border-radius:18px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s ease;z-index:1200}.toast.show{opacity:1;transform:translateY(-6px)}
+.toast{position:fixed;bottom:22px;right:22px;min-width:280px;max-width:420px;background:#0a0e27;color:#fff;padding:14px 16px;border-radius:18px;box-shadow:0 8px 24px rgba(15,23,42,.2);opacity:0;pointer-events:none;transition:.35s cubic-bezier(0.4, 0, 0.2, 1);z-index:1200;border:1px solid rgba(255,255,255,.1)}/* MEJORA UI: Toast mejorado */
+.toast.show{opacity:1;transform:translateY(-8px);pointer-events:auto}
 .mt-16{margin-top:16px}
 @media (max-width:1180px){.stats-grid,.mesas-grid,.menu-grid,.kitchen-board{grid-template-columns:repeat(2,1fr)}.grid-two{grid-template-columns:1fr}}
 @media (max-width:860px){.app-shell{grid-template-columns:1fr}.sidebar{position:fixed;left:-100%;top:0;bottom:0;width:280px;z-index:1100;transition:.25s ease}.sidebar.open{left:0}.main-content{padding:18px}.topbar{padding:16px}.hero-panel{flex-direction:column;align-items:flex-start}}

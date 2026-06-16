@@ -118,6 +118,8 @@
             <h3>Compras e inventario</h3>
             <p>Registra compras del negocio y lleva control básico de abastecimiento.</p>
           </div>
+          <!-- MEJORA AGREGADA: Botón para borrar historial de compras -->
+          <button class="btn btn-danger" id="clearPurchasesBtn" onclick="clearPurchasesHistory()">🗑️ Borrar historial</button>
         </div>
 
         <div class="grid-two">
@@ -310,6 +312,23 @@
             <button class="btn btn-success" id="markOrderPaidBtn">Marcar como pagado</button>
           </div>
         </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEJORA AGREGADA: Modal de confirmación genérico -->
+  <div class="modal-backdrop hidden" id="confirmModal">
+    <div class="modal modal-small">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow">Confirmación requerida</span>
+          <h3>Verificar acción</h3>
+        </div>
+      </div>
+      <p id="confirmMessage" style="margin: 0 0 20px 0; color: #475569; line-height: 1.6;"></p>
+      <div class="action-row">
+        <button class="btn btn-secondary" id="confirmNoBtn">Cancelar</button>
+        <button class="btn btn-primary" id="confirmYesBtn">Confirmar</button>
       </div>
     </div>
   </div>

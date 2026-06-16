@@ -28,7 +28,10 @@ function bindBaseEvents() {
   document.querySelectorAll('.nav-link').forEach(button => button.addEventListener('click', () => switchView(button.dataset.view)));
   document.querySelectorAll('[data-view-link]').forEach(button => button.addEventListener('click', () => switchView(button.dataset.viewLink)));
   document.getElementById('toggleSidebar').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
-  document.getElementById('logoutBtn').addEventListener('click', logout);
+  // MEJORA UI: Confirmación antes de cerrar sesión
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    confirmAction('¿Desea cerrar sesión?', logout);
+  });
   document.getElementById('loginForm').addEventListener('submit', handleLogin);
   document.getElementById('closeOrderModal').addEventListener('click', closeOrderModal);
   document.getElementById('refreshKitchenBtn').addEventListener('click', renderKitchenBoard);
@@ -221,12 +224,18 @@ function setKitchenStatus(orderId, status) {
   order.status = status; syncTableWithOrder(order); saveState(); renderAll(); pushActivity('Cocina actualizada', `El pedido #${order.id} fue marcado como ${status}.`); showToast(`Pedido #${order.id} marcado como ${status}.`);
 }
 function markCurrentOrderPaid() {
-  const order = state.orders.find(item => item.id === currentEditingOrderId); if (!order) return;
-  if (!order.items.length) return showToast('No puedes cerrar una cuenta vacía.');
-  order.status = 'pagado'; order.paidAt = nowText();
-  const table = state.tables.find(item => item.id === order.tableId);
-  if (table) { table.status = 'pagado'; table.currentOrderId = null; }
-  saveState(); pushActivity('Venta cerrada', `${order.tableName} fue facturada por ${formatCurrency(getOrderTotal(order))}.`); closeOrderModal(); renderAll(); showToast(`Pedido #${order.id} marcado como pagado.`);
+  // MEJORA AGREGADA: Confirmación antes de cerrar la cuenta
+  confirmAction(
+    '¿Desea cerrar esta cuenta?',
+    () => {
+      const order = state.orders.find(item => item.id === currentEditingOrderId); if (!order) return;
+      if (!order.items.length) return showToast('No puedes cerrar una cuenta vacía.');
+      order.status = 'pagado'; order.paidAt = nowText();
+      const table = state.tables.find(item => item.id === order.tableId);
+      if (table) { table.status = 'pagado'; table.currentOrderId = null; }
+      saveState(); pushActivity('Venta cerrada', `${order.tableName} fue facturada por ${formatCurrency(getOrderTotal(order))}.`); closeOrderModal(); renderAll(); showToast(`Pedido #${order.id} marcado como pagado.`);
+    }
+  );
 }
 function syncTableWithOrder(order) {
   const table = state.tables.find(item => item.id === order.tableId); if (!table) return;
@@ -275,3 +284,49 @@ function generateId(type) { const base = Date.now().toString().slice(-6); return
 function nowText() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
 function formatCurrency(value) { return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(value || 0); }
 function showToast(message) { const toast = document.getElementById('toast'); toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2400); }
+
+// MEJORA AGREGADA: Función de confirmación modal genérica
+function confirmAction(message, onConfirm) {
+  const confirmModal = document.getElementById('confirmModal');
+  const confirmMessage = document.getElementById('confirmMessage');
+  const confirmYesBtn = document.getElementById('confirmYesBtn');
+  const confirmNoBtn = document.getElementById('confirmNoBtn');
+  
+  confirmMessage.textContent = message;
+  confirmModal.classList.remove('hidden');
+  
+  const handleConfirm = () => {
+    confirmModal.classList.add('hidden');
+    cleanupHandlers();
+    onConfirm();
+  };
+  
+  const handleCancel = () => {
+    confirmModal.classList.add('hidden');
+    cleanupHandlers();
+  };
+  
+  const cleanupHandlers = () => {
+    confirmYesBtn.removeEventListener('click', handleConfirm);
+    confirmNoBtn.removeEventListener('click', handleCancel);
+  };
+  
+  confirmYesBtn.addEventListener('click', handleConfirm);
+  confirmNoBtn.addEventListener('click', handleCancel);
+}
+
+// MEJORA AGREGADA: Función para borrar historial de compras
+function clearPurchasesHistory() {
+  confirmAction(
+    '¿Está seguro de eliminar el historial de compras?',
+    () => {
+      state.purchases = [];
+      saveState();
+      renderPurchases();
+      renderStats();
+      renderQuickInsights();
+      pushActivity('Historial borrado', 'El historial de compras fue eliminado completamente.');
+      showToast('Historial de compras eliminado.');
+    }
+  );
+}
